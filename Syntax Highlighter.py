@@ -57,7 +57,12 @@ class DetectFileTypeCommand(sublime_plugin.EventListener):
 
         if self.is_apache():
             return
+            
+        if self.is_haml():
+            return
 
+        if self.is_sass():
+            return
 
     def is_rspec(self):
         if self.name.find('_spec') > -1:
@@ -155,6 +160,17 @@ class DetectFileTypeCommand(sublime_plugin.EventListener):
             return True
 
         return False
+
+
+    def is_haml(self):
+        if self.ext == '.haml' or self.ext == '.hamlc':
+            self.set_syntax('Ruby Haml', 'Haml/Syntaxes')
+            return True
+
+    def is_sass(self):
+        if self.ext == '.sass':
+            self.set_syntax('Sass', 'Sass/Syntaxes')
+            return True
 
 
     def reset_cache_variables(self, view, file_name):
